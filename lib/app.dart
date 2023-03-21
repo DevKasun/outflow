@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:outflow/view/screen/add_new_category_screen.dart';
 import 'package:outflow/view/screen/home_screen.dart';
 
 class App extends StatelessWidget {
@@ -9,12 +10,17 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+          primarySwatch: Colors.blue,
+          appBarTheme: const AppBarTheme(
+            backgroundColor: Color(0xffffffff),
+            foregroundColor: Color(0xff202020),
+            shadowColor: Color(0x00202020),
+          )),
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
         '/': (context) => const HomeScreen(),
+        '/add-new': (context) => const AddNewCategoryScreen(),
       },
     );
   }

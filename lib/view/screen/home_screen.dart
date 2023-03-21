@@ -3,39 +3,29 @@ import 'package:flutter/material.dart';
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
-  final array1 = [
-    {
-      "id": 1,
-      "day": "Monday",
-      "value": "20000"
-    }
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xffffffff),
       appBar: AppBar(
-        backgroundColor: const Color(0xffffffff),
-        foregroundColor: const Color(0xff202020),
-        shadowColor: const Color(0x00202020),
         leading: IconButton(
           onPressed: () {},
           icon: const Icon(
             Icons.menu,
             size: 34,
-            color: Color(0xff202020),
+            color: Color(0xFF202020),
           ),
         ),
         title: const Text(
           "OverFlow",
-          style: TextStyle(fontSize: 32),
+          style: TextStyle(
+            fontSize: 32,
+            color: Color(0xFF202020),
+          ),
         ),
       ),
       body: SafeArea(
         child: Container(
-          width: double.infinity,
-          height: double.infinity,
           color: Colors.white,
           child: ListView(
             shrinkWrap: true,
@@ -50,8 +40,7 @@ class HomeScreen extends StatelessWidget {
                       Expanded(
                         flex: 72,
                         child: Container(
-                          width: 340,
-                          height: 100,
+                          height: 90,
                           decoration: const BoxDecoration(
                             color: Color(0xFF202020),
                             borderRadius: BorderRadius.only(
@@ -87,7 +76,6 @@ class HomeScreen extends StatelessWidget {
                                         style: TextStyle(
                                           color: Color(0xFFFFFFFF),
                                           fontSize: 24,
-                                          fontWeight: FontWeight.w600,
                                         ),
                                       ),
                                     ),
@@ -99,7 +87,7 @@ class HomeScreen extends StatelessWidget {
                                       style: TextStyle(
                                           color: Color(0xFFFFFFFF),
                                           fontSize: 32,
-                                          fontWeight: FontWeight.w600),
+                                          fontWeight: FontWeight.w400),
                                     ),
                                   ],
                                 ),
@@ -114,8 +102,7 @@ class HomeScreen extends StatelessWidget {
                       Expanded(
                         flex: 20,
                         child: Container(
-                          width: 70,
-                          height: 100,
+                          height: 90,
                           decoration: const BoxDecoration(
                             color: Color(0xFFFFD100),
                             borderRadius: BorderRadius.only(
@@ -129,7 +116,12 @@ class HomeScreen extends StatelessWidget {
                             children: [
                               IconButton(
                                 iconSize: 50,
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.pushNamed(
+                                    context,
+                                    "/add-new",
+                                  );
+                                },
                                 icon:
                                     const Icon(Icons.add_circle_outline_sharp),
                               )
