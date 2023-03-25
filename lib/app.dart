@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:outflow/view/screen/add_new_category_screen.dart';
 import 'package:outflow/view/screen/home_screen.dart';
 
 class App extends StatelessWidget {
@@ -19,8 +18,7 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
-        '/': (context) => const HomeScreen(),
-        '/add-new': (context) => const AddNewCategoryScreen(),
+        '/': (context) => HomeScreen(),
       },
     );
   }
