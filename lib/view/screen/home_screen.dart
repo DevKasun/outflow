@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:outflow/view/widgets/add_new_category.dart';
 import 'package:outflow/view/widgets/text_form_field.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -13,8 +14,8 @@ class _HomeScreenState extends State<HomeScreen> {
   final formKey = GlobalKey<FormState>();
 
   String categoryName = "";
-  Color categoryColor = const Color(0xFF202020);
-  final List<Color> categoryColors = const [
+  Color categoryColor = Color(0xFF202020);
+  final List<Color> categoryColors = [
     Color(0xFFF94144),
     Color(0xFFF3722C),
     Color(0xFFF8961E),
@@ -264,16 +265,7 @@ class _HomeScreenState extends State<HomeScreen> {
               color: const Color(0xFFFFD100),
               borderRadius: BorderRadius.circular(10.0),
             ),
-            child: IconButton(
-              icon: const Icon(
-                Icons.add_circle,
-                size: 50.0,
-                color: Color(0xFF333533),
-              ),
-              onPressed: () {
-                _addNewCategoryBottomSheet();
-              },
-            ),
+            child: const AddNewCategory(),
           );
         }
         return Container(
@@ -416,6 +408,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               categoryColor = color;
                             },
                           );
+                          Navigator.pop(context); // to close the bottom sheet
+                          _addNewCategoryBottomSheet();
                         },
                         child: Container(
                           decoration: BoxDecoration(
