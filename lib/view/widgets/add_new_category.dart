@@ -1,11 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:outflow/providers/category_provider.dart';
 import 'package:outflow/providers/color_provider.dart';
+import 'package:outflow/view/widgets/category_color_selector.dart';
 import 'package:outflow/view/widgets/text_form_field.dart';
 import 'package:provider/provider.dart';
+import 'package:outflow/modal/category_model.dart';
 import 'package:uuid/uuid.dart';
 
 class AddNewCategory extends StatefulWidget {
@@ -17,8 +17,7 @@ class AddNewCategory extends StatefulWidget {
 
 class _AddNewCategoryState extends State<AddNewCategory> {
   final formKey = GlobalKey<FormState>();
-
-  String categoryName = "";
+  String _categoryName = "";
 
   @override
   Widget build(BuildContext context) {
@@ -93,8 +92,17 @@ class _AddNewCategoryState extends State<AddNewCategory> {
                   CustomTextFormField(
                     hintText: "Category name",
                     isPassword: false,
-                    onValidate: (String? value) {},
-                    onSaved: (String? value) {},
+                    onValidate: (String? value) {
+                      if (value != null) {
+                        if (value.isEmpty) {
+                          return "Please enter valid name";
+                        }
+                      }
+                      return null;
+                    },
+                    onSaved: (String? value) {
+                      _categoryName = value ?? "";
+                    },
                   ),
                   const SizedBox(
                     height: 24.0,
@@ -109,61 +117,11 @@ class _AddNewCategoryState extends State<AddNewCategory> {
                   const SizedBox(
                     height: 10.0,
                   ),
-                  GridView.count(
-                    shrinkWrap: true,
-                    crossAxisCount: 5,
-                    mainAxisSpacing: 24.0,
-                    crossAxisSpacing: 24.0,
-                    children: List.generate(
-                      context.watch<ColorProvider>().categoryColors.length,
-                      (index) {
-                        final color = context
-                            .watch<ColorProvider>()
-                            .categoryColors[index];
-                        return GestureDetector(
-                          onTap: () {
-                            setState(
-                              () {
-                                context.read<ColorProvider>().setColor(color);
-                              },
-                            );
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: color,
-                              border: context
-                                          .watch<ColorProvider>()
-                                          .selectedColor ==
-                                      color
-                                  ? Border.all(
-                                      width: 2.0,
-                                      color: const Color(0xFF202020),
-                                    )
-                                  : null,
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
+                  const CategoryColorSelector(),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 24.0),
                     child: ElevatedButton(
-                      onPressed: () {
-                        // final categoryProvider = Provider.of<CategoryProvider>(
-                        //   context,
-                        //   listen: false,
-                        // );
-                        // final category = Category(
-                        //   id: const Uuid().v4(),
-                        //   name: categoryName,
-                        //   color: context.watch<ColorProvider>().selectedColor,
-                        //   date: DateTime.now(),
-                        // );
-                        // categoryProvider.addCategory(category);
-                        Navigator.pop(context);
-                      },
+                      onPressed: () => _submitNewCategory(context),
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.all(16.0),
                         shape: RoundedRectangleBorder(
@@ -185,5 +143,22 @@ class _AddNewCategoryState extends State<AddNewCategory> {
         );
       },
     );
+  }
+
+  void _submitNewCategory(BuildContext context) {
+    if (formKey.currentState!.validate()) {
+      formKey.currentState!.save();
+      final newCategory = CategoryModel(
+        id: const Uuid().v4(),
+        categoryName: _categoryName,
+        categoryColor: context.read<ColorProvider>().selectedColor,
+        expenseAmount: 0.0,
+        date: DateTime.now(),
+      );
+      Provider.of<CategoryProvider>(context, listen: false)
+          .addCategory(newCategory);
+      Provider.of<ColorProvider>(context, listen: false).resetColor();
+      Navigator.pop(context);
+    }
   }
 }

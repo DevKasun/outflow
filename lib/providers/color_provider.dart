@@ -24,4 +24,8 @@ class ColorProvider extends ChangeNotifier {
     _selectedColor = color;
     notifyListeners();
   }
+
+  void resetColor() {
+    _selectedColor = const Color(0xFF202020);
+  }
 }

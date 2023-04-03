@@ -1,12 +1,15 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:outflow/modal/category_model.dart';
 
 class CategoryProvider extends ChangeNotifier {
-  final List<Category> _categories = [];
+  // final List<Category> _categories = [];
 
-  List<Category> get catogories => _categories;
+  final List<CategoryModel> _categories = [];
 
-  void addCategory(Category category) {
+  List<CategoryModel> get catogories => _categories;
+
+  void addCategory(CategoryModel category) {
     _categories.add(category);
     notifyListeners();
   }
