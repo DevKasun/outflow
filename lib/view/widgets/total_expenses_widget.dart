@@ -2,12 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:lottie/lottie.dart';
+import 'package:outflow/providers/category_provider.dart';
+import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
 
 class TotalExpensesWidget extends StatelessWidget {
   const TotalExpensesWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final categories = Provider.of<CategoryProvider>(context).catogories;
+    final now = DateTime.now();
+    final formattedDate = DateFormat("MMMM, yyyy").format(now);
+
+    double totalExpenses = 0.00;
+
+    for (final category in categories) {
+      totalExpenses += category.expenseAmount;
+    }
+
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: 16.0,
@@ -32,9 +45,9 @@ class TotalExpensesWidget extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            "April 2023",
-                            style: TextStyle(
+                          Text(
+                            "${formattedDate}",
+                            style: const TextStyle(
                               color: Color(0xFFFFFFFF),
                               fontSize: 16,
                             ),
@@ -44,8 +57,8 @@ class TotalExpensesWidget extends StatelessWidget {
                           ),
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.end,
-                            children: const [
-                              Padding(
+                            children: [
+                              const Padding(
                                 padding: EdgeInsets.only(
                                   bottom: 2.0,
                                 ),
@@ -57,12 +70,12 @@ class TotalExpensesWidget extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 6.0,
                               ),
                               Text(
-                                "0.00",
-                                style: TextStyle(
+                                '$totalExpenses',
+                                style: const TextStyle(
                                   color: Color(0xFFFFFFFF),
                                   fontSize: 32,
                                   fontWeight: FontWeight.w400,
