@@ -1,13 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:outflow/providers/category_provider.dart';
+import 'package:outflow/view/widgets/add_expenses_modal.dart';
 import 'package:outflow/view/widgets/add_new_category.dart';
 import 'package:provider/provider.dart';
 
 class CategoryGriodView extends StatelessWidget {
-  const CategoryGriodView({super.key});
+  const CategoryGriodView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +33,15 @@ class CategoryGriodView extends StatelessWidget {
         }
         final category = categoryItems[index - 1];
         return GestureDetector(
+          onTap: () {
+            showModalBottomSheet(
+              context: context,
+              isScrollControlled: true,
+              builder: (BuildContext context) {
+                return AddExpenseModal(categoryID: category.id);
+              },
+            );
+          },
           child: Container(
             height: 80,
             padding: const EdgeInsets.only(

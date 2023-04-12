@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:outflow/providers/category_provider.dart';
 import 'package:outflow/providers/color_provider.dart';
