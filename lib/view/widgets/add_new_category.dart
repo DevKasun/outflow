@@ -148,14 +148,11 @@ class _AddNewCategoryState extends State<AddNewCategory> {
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
       final newCategory = CategoryModel(
-        id: const Uuid().v4(),
         categoryName: _categoryName,
         categoryColor: context.read<ColorProvider>().selectedColor,
-        expenseAmount: 0.0,
-        date: DateTime.now(),
       );
       Provider.of<CategoryProvider>(context, listen: false)
-          .addCategory(newCategory);
+          .addCategory(newCategory.categoryName, newCategory.categoryColor);
       Provider.of<ColorProvider>(context, listen: false).resetColor();
       Navigator.pop(context);
     }

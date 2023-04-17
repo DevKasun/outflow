@@ -34,13 +34,13 @@ class CategoryGriodView extends StatelessWidget {
         final category = categoryItems[index - 1];
         return GestureDetector(
           onTap: () {
-            showModalBottomSheet(
-              context: context,
-              isScrollControlled: true,
-              builder: (BuildContext context) {
-                return AddExpenseModal(categoryID: category.id);
-              },
-            );
+            // showModalBottomSheet(
+            //   context: context,
+            //   isScrollControlled: true,
+            //   builder: (BuildContext context) {
+            //     return AddExpenseModal(categoryID: category.id);
+            //   },
+            // );
           },
           child: Container(
             height: 80,
@@ -79,13 +79,13 @@ class CategoryGriodView extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    Text(
-                      category.expenseAmount.toStringAsFixed(2),
-                      style: const TextStyle(
-                        color: Color(0xFFFFFFFF),
-                        fontSize: 24,
-                      ),
-                    ),
+                    // Text(
+                    //   category.expenseAmount.toStringAsFixed(2),
+                    //   style: const TextStyle(
+                    //     color: Color(0xFFFFFFFF),
+                    //     fontSize: 24,
+                    //   ),
+                    // ),
                   ],
                 ),
               ],

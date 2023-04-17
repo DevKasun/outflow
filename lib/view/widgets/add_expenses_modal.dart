@@ -106,15 +106,15 @@ class _AddExpenseModalState extends State<AddExpenseModal> {
                       backgroundColor: const Color(0xFF333533),
                     ),
                     onPressed: () {
-                      if (_formKey.currentState != null &&
-                          _formKey.currentState!.validate()) {
-                        Provider.of<CategoryProvider>(context, listen: false)
-                            .addExpensesValues(
-                          widget.categoryID,
-                          _exAmount!,
-                        );
-                        Navigator.pop(context);
-                      }
+                      // if (_formKey.currentState != null &&
+                      //     _formKey.currentState!.validate()) {
+                      //   Provider.of<CategoryProvider>(context, listen: false)
+                      //       .addExpensesValues(
+                      //     widget.categoryID,
+                      //     _exAmount!,
+                      //   );
+                      //   Navigator.pop(context);
+                      // }
                     },
                     child: const Text("Add"),
                   ),

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:lottie/lottie.dart';
 import 'package:outflow/providers/category_provider.dart';
 import 'package:provider/provider.dart';
@@ -18,7 +16,7 @@ class TotalExpensesWidget extends StatelessWidget {
     double totalExpenses = 0.00;
 
     for (final category in categories) {
-      totalExpenses += category.expenseAmount;
+      // totalExpenses += category.expenseAmount;
     }
 
     return Padding(
