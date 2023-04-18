@@ -27,19 +27,19 @@ class DatabaseHelper {
   Future _createDB(Database db, int version) async {
     await db.execute('''
       CREATE TABLE tableCategories(
-        "${CategoryFields.id} INTEGER PRIMARY KEY AUTOINCREMENT",
-        "${CategoryFields.categoryName} TEXT NOT NULL",
-        "${CategoryFields.CategoryColor} TEXT NOT NULL",
-        "${CategoryFields.expenseAmount} DECIMAL NOT NULL",
-        "${CategoryFields.date} TEXT NOT NULL",
-      ),
+        "${CategoryFields.id}" INTEGER PRIMARY KEY AUTOINCREMENT,
+        "${CategoryFields.categoryName}" TEXT NOT NULL,
+        "${CategoryFields.CategoryColor}" TEXT NOT NULL,
+        "${CategoryFields.expenseAmount}" DECIMAL NOT NULL,
+        "${CategoryFields.date}" TEXT NOT NULL
+      )
     ''');
   }
 
   Future<int> insertCategory(CategoryModel category) async {
     final db = await instance.database;
     final categoryMap = category.toJson();
-    final id = await db.insert(tableCategories, categoryMap);
+    final id = await db.insert('tableCategories', categoryMap);
     return id;
   }
 
