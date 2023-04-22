@@ -49,6 +49,17 @@ class DatabaseHelper {
     return results.map((map) => CategoryModel.fromJson(map)).toList();
   }
 
+  Future<int> updateExpenseAmount(CategoryModel category) async {
+    final db = await instance.database;
+    final categoryMap = category.toJson();
+    return await db.update(
+      'tableCategories',
+      categoryMap,
+      where: '${CategoryFields.id} = ?',
+      whereArgs: [category.id],
+    );
+  }
+
   Future close() async {
     final db = await instance.database;
     db.close();

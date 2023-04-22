@@ -27,9 +27,16 @@ class CategoryProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // void addExpensesValues(String categoryId, double expAmount) {
-  //   final categoryItem = _categories.firstWhere((cat) => cat.id == categoryId);
-  //   categoryItem.expenseAmount += expAmount;
-  //   notifyListeners();
+  // void addExpensesValues(String categoryId, double expAmount) async {
+  //   final categoryItem = _categories.firstWhere(
+  //     (cat) => cat.id == categoryId,
+  //     orElse: () => null,
+  //   );
+  //   if (categoryItem != null) {
+  //     categoryItem.expenseAmount =
+  //         (categoryItem.expenseAmount ?? 0) + expAmount;
+  //     await dbHelper.updateCategory(categoryItem);
+  //     notifyListeners();
+  //   }
   // }
 }
