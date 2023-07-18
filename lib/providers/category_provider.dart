@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:outflow/modal/category_model.dart';
+import 'package:outflow/model/category_model.dart';
 
 class CategoryProvider extends ChangeNotifier {
   final List<CategoryModel> _categories = [];

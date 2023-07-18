@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:outflow/providers/category_provider.dart';
+import 'package:intl/intl.dart';
+import 'package:outflow/data_store/data_store.dart';
+import 'package:outflow/model/expense_model.dart';
 import 'package:outflow/providers/color_provider.dart';
 import 'package:outflow/view/widgets/category_color_selector.dart';
 import 'package:outflow/view/widgets/text_form_field.dart';
 import 'package:provider/provider.dart';
-import 'package:outflow/modal/category_model.dart';
-import 'package:uuid/uuid.dart';
 
 class AddNewCategory extends StatefulWidget {
-  const AddNewCategory({super.key});
+  const AddNewCategory({Key? key}) : super(key: key);
 
   @override
   State<AddNewCategory> createState() => _AddNewCategoryState();
 }
 
 class _AddNewCategoryState extends State<AddNewCategory> {
+  final ExpenseDataStore _expenseDataStore = ExpenseDataStore();
   final formKey = GlobalKey<FormState>();
   String _categoryName = "";
 
@@ -44,7 +45,6 @@ class _AddNewCategoryState extends State<AddNewCategory> {
       clipBehavior: Clip.antiAliasWithSaveLayer,
       builder: (BuildContext context) {
         return Container(
-          // height: 200,
           color: Colors.white,
           child: Padding(
             padding: const EdgeInsets.symmetric(
@@ -107,7 +107,7 @@ class _AddNewCategoryState extends State<AddNewCategory> {
                     height: 24.0,
                   ),
                   const Text(
-                    "Category name",
+                    "Category color",
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
                       color: Color(0xFF202020),
@@ -124,7 +124,7 @@ class _AddNewCategoryState extends State<AddNewCategory> {
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.all(16.0),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10), // <-- Radius
+                          borderRadius: BorderRadius.circular(10),
                         ),
                         textStyle: const TextStyle(
                           fontSize: 18,
@@ -147,17 +147,18 @@ class _AddNewCategoryState extends State<AddNewCategory> {
   void _submitNewCategory(BuildContext context) {
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
-      final newCategory = CategoryModel(
-        id: const Uuid().v4(),
+      DateTime now = DateTime.now();
+      String formattedDate = DateFormat('yyyy-MM-dd – kk:mm').format(now);
+      final newCategory = ExpenseModel(
         categoryName: _categoryName,
-        categoryColor: context.read<ColorProvider>().selectedColor,
+        categoryColor: context.read<ColorProvider>().selectedColor.value,
         expenseAmount: 0.0,
-        date: DateTime.now(),
+        date: formattedDate,
       );
-      Provider.of<CategoryProvider>(context, listen: false)
-          .addCategory(newCategory);
+      _expenseDataStore.addcategory(expenseModel: newCategory);
       Provider.of<ColorProvider>(context, listen: false).resetColor();
       Navigator.pop(context);
+      setState(() {});
     }
   }
 }

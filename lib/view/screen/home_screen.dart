@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
-import 'package:outflow/view/widgets/add_new_category.dart';
 import 'package:outflow/view/widgets/category_grid_view.dart';
 import 'package:outflow/view/widgets/total_expenses_widget.dart';
 
@@ -135,7 +133,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       left: 16.0,
                       right: 16.0,
                     ),
-                    child: CategoryGriodView(),
+                    child: CategoryGridView(),
                   ),
                 ],
               ),
