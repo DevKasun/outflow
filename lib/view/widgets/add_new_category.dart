@@ -144,7 +144,7 @@ class _AddNewCategoryState extends State<AddNewCategory> {
     );
   }
 
-  void _submitNewCategory(BuildContext context) {
+  Future<void> _submitNewCategory(BuildContext context) async {
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
       DateTime now = DateTime.now();
@@ -155,9 +155,10 @@ class _AddNewCategoryState extends State<AddNewCategory> {
         expenseAmount: 0.0,
         date: formattedDate,
       );
-      _expenseDataStore.addcategory(expenseModel: newCategory);
+      await _expenseDataStore.addcategory(expenseModel: newCategory);
       Provider.of<ColorProvider>(context, listen: false).resetColor();
       Navigator.pop(context);
+
       setState(() {});
     }
   }

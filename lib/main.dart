@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:outflow/app.dart';
+import 'package:outflow/app.dart';    
 import 'package:outflow/model/expense_model.dart';
 import 'package:outflow/providers/category_provider.dart';
 import 'package:outflow/providers/color_provider.dart';

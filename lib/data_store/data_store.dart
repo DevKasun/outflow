@@ -9,6 +9,12 @@ class ExpenseDataStore {
     return Hive.box<ExpenseModel>(expenseDataBox);
   }
 
+  static Future<void> initialize() async {
+    await Hive.initFlutter();
+    Hive.registerAdapter(ExpenseModelAdapter());
+    await Hive.openBox<ExpenseModel>(expenseDataBox);
+  }
+
   Future<void> addcategory({required ExpenseModel expenseModel}) async {
     final box = await ExpenseDataStore.box;
     await box.add(expenseModel);

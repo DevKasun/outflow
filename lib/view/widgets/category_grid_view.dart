@@ -12,10 +12,12 @@ class CategoryGridView extends StatefulWidget {
 }
 
 class _CategoryGridViewState extends State<CategoryGridView> {
+  Future<List<ExpenseModel>> _expensesFuture = ExpenseDataStore.box.then((box) => box.values.toList());
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<ExpenseModel>>(
-      future: ExpenseDataStore.box.then((box) => box.values.toList()),
+      future: _expensesFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return CircularProgressIndicator();
