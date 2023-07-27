@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:outflow/data_store/data_store.dart';
 import 'package:outflow/model/expense_model.dart';
-import 'package:outflow/view/widgets/add_expenses_modal.dart';
+import 'package:outflow/view/widgets/add_expenses_model.dart';
 import 'package:outflow/view/widgets/add_new_category.dart';
+import 'package:outflow/view/widgets/delete_category_model.dart';
 
 class CategoryGridView extends StatefulWidget {
   const CategoryGridView({Key? key}) : super(key: key);
@@ -86,7 +87,21 @@ class _CategoryGridViewState extends State<CategoryGridView> {
                           ),
                         ),
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            showModalBottomSheet(
+                              context: context,
+                              isScrollControlled: true,
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(20),
+                                  topRight: Radius.circular(20),
+                                ),
+                              ),
+                              builder: (BuildContext context) {
+                                return DeleteCategoryModel(index: index - 1);
+                              },
+                            );
+                          },
                           icon: const Icon(
                             color: Color(0xFFFFFFFF),
                             Icons.pending,
