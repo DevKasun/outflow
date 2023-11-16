@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "1088421932979",
+    "project_id": "outflow-v2-9b250",
+    "storage_bucket": "outflow-v2-9b250.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1088421932979:android:f15712b9d903e2bda7a5c6",
+        "android_client_info": {
+          "package_name": "com.example.outflow"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1088421932979-p2sv03om3g7kipeigahgl19lgn46si08.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCkc1UZ-Is455kXIXgotsuLuGplkJ1XeXU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1088421932979-p2sv03om3g7kipeigahgl19lgn46si08.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1088421932979-ttop2a404se48r0gtbfgemus6b66dhac.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.outflow"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
